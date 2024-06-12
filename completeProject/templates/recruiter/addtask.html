@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    
+<form action="{% url 'addtask' %}" method="POST">
+  {% csrf_token %}
+
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Task name</label>
+      <input type="text" class="form-control" name="exampleInputEmail1"   id="exampleInputEmail1" >
+      
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Description</label>
+      <input type="text" class="form-control" name="exampleInputPassword1"  id="exampleInputPassword1">
+    </div>
+    <div class="mb-3">
+      <label for="due_date" class="form-label">Due Date</label>
+      <input type="date" class="form-control" name="due_date" id="due_date">
+    </div>
+
+    <select name="category" id="cars">
+      
+      {% for i in category %}
+      <option value="{{i.category}}">{{i.category}}</option>
+      {% endfor %}
+    </select>
+    <br/>
+    <br/>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+
+  
+{% endblock content %}
+    

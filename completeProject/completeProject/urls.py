@@ -10,6 +10,8 @@ from .views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('authentication/', include('backendapp.urls')),
+    path('todoapp/', include('another.urls')),
+
     path('',signin, name='signin'),
     path('signup/',signup, name='signup'),
     path('dashboard/',dashboard, name='dashboard'),
@@ -22,6 +24,12 @@ urlpatterns = [
     path('postedjob/',postedjob, name='postedjob'),
     path('applicants/<int:myid>',applicants, name='applicants'),
     path('logup/',logup, name='logup'),
+
+
+
+    path('addtask/',addtask, name='addtask'),
+    path('tasklist/',tasklist, name='tasklist'),
+    path('homepage/',homepage, name='homepage'),
     
     
     
