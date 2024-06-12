@@ -1,0 +1,10 @@
+
+created_by
+job_title
+category
+job_description
+skills
+number_of_openings
+salary
+deadline
+qualifications

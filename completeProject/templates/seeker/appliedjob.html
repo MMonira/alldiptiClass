@@ -1,0 +1,59 @@
+{% extends "profile.html" %}
+
+{% block information %}
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+th {
+   background-color: #04AA6D;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:hover {background-color: rgb(167, 230, 255);}
+</style>
+</head>
+<body>
+
+<h2>You Applied for these job</h2>
+
+
+<table>
+  <tr>
+    <th>Job Title </th>
+    <th>Category </th>
+    <th>Skills </th>
+    <th>Deadline </th>
+    <th>Salary </th>
+    <th>Status </th>
+
+  </tr>
+  {% for i in applied_job %}
+  <tr>
+      <td>{{i.jobmodel.job_title}}</td>
+      <td>{{i.jobmodel.category}}</td>
+      <td>{{i.jobmodel.skills}}</td>
+      <td>{{i.jobmodel.deadline}}</td>
+      <td>{{i.jobmodel.salary}}</td>
+      <td>{{i.status}}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+</body>
+</html>
+
+
+
+
+{% endblock information %}

@@ -1,0 +1,70 @@
+{% extends "profile.html" %}
+
+{% block information %}
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+th {
+   background-color: #04AA6D;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+h2{
+   text-align: center;
+}
+
+tr:hover {background-color: rgb(167, 230, 255);}
+</style>
+</head>
+<body>
+
+<h1>List of Applicants</h1>
+<h2>{{job.job_title}}</h2>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Applicant name</th>
+    <th>Skills </th>
+    <th>qualifications </th>
+    <th>resume </th>
+    <th>seeker_profile_pic </th>
+    <th>Current Status </th>
+    <th>Actions </th>
+
+  </tr>
+  {% for i in applicants %}
+  <tr>
+      <td>{{i.id}}</td>
+      <td>{{i.applicants}}</td>
+      <td>{{i.skills}}</td>
+      <td>{{i.qualifications}}</td>
+      <td>{{i.resume}}</td>
+      <td>
+         <img src="/{{i.seeker_profile_pic}}" alt="">
+      </td>
+      <td>{{i.status}}</td>
+      <td>
+         <a href="">Reject</a>
+         <a href="">Call for Interview</a>
+      
+      </td>
+
+  </tr>
+  {% endfor %}
+</table>
+
+</body>
+</html>
+
+{% endblock information %}

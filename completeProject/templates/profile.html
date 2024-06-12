@@ -1,0 +1,25 @@
+{% extends "base.html" %} {% block style %} .container { text-align: center;
+   display: flex; margin: auto; flex-direction: column; margin-top: 20px; } img{
+   width: 100px; height: auto; } .center{ margin: auto ; text-align: center; }
+   .button { background-color: #04AA6D; border: none; color: white; padding: 15px
+   32px; text-align: center; text-decoration: none; display: inline-block;
+   font-size: 16px; margin: auto; cursor: pointer; } .button2 {background-color:
+   #008CBA;} /* Blue */ .button3 {background-color: #f44336;} {% endblock style %}
+   {% block content %}
+   <div class="container">
+      <div><img src="/{{user.profile_pic}}" alt="" /></div>
+      <h1>Welcome {{user.first_name}}</h1>
+   </div>
+   <div class="center">
+      <button class="button"><a href="">Edit Profile</a></button>
+      <button class="button button2"><a href="">Change Password</a></button>
+      {% if user.user_type == 'admin' %}
+      <button class="button button3"><a href="{% url 'postedjob' %}">Posted Job</a></button>
+      {% elif user.user_type == 'user' %}
+      <button class="button button3">
+      <a href="{% url 'appliedjob' %}">Applied Job</a>
+      </button>
+      {% endif %}
+   </div>
+   {% block information %} {% endblock information %} {% endblock content %}
+   

@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Post Container</title>
+    <style>
+      * {
+         box-sizing: border-box;
+         margin: 0;
+         padding: 0;
+         font-family: Arial, sans-serif;
+     }
+     
+     
+     .job-post-container {
+         margin:20px;
+         background-color: white;
+         padding: 20px;
+         border-radius: 10px;
+         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+         max-width: 900px;
+      
+         display: flex;
+         flex-direction: column;
+         gap: 15px;
+     }
+     
+     .job-header {
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+         border-bottom: 1px solid #ddd;
+         padding-bottom: 10px;
+     }
+     
+     .job-title {
+         font-size: 24px;
+         font-weight: bold;
+         text-align: center;
+     }
+     
+     .created-by {
+         font-size: 14px;
+         color: #555;
+     }
+     
+     .job-category {
+         font-size: 18px;
+         font-weight: bold;
+         color: #333;
+     }
+     
+     .job-description {
+         font-size: 16px;
+         line-height: 1.5;
+         color: #666;
+     }
+     
+     .job-skills {
+         font-size: 16px;
+         line-height: 1.5;
+         color: #666;
+     }
+     
+     .job-skills ul {
+         list-style: disc;
+         margin-left: 20px;
+     }
+     
+     .job-details {
+         display: flex;
+         flex-wrap: wrap;
+         gap: 10px;
+     }
+     
+     .detail-item {
+         background-color: #f9f9f9;
+         border: 1px solid #ddd;
+         border-radius: 5px;
+         padding: 10px;
+         flex: 1 1 calc(33.333% - 20px);
+         display: flex;
+         flex-direction: column;
+         gap: 5px;
+     }
+     
+     .detail-label {
+         font-weight: bold;
+         color: #333;
+     }
+     
+     .detail-value {
+         color: #555;
+     }
+     
+     .job-qualifications {
+         font-size: 16px;
+         line-height: 1.5;
+         color: #666;
+     }
+     .button {
+      background-color: #04AA6D; /* Green */
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
+    
+    .button2 {background-color: #008CBA;} /* Blue */
+    .button3 {background-color: #f44336;}
+     
+    </style>
+</head>
+<body>
+   {% for i,j in job_filtered %}
+    <div class="job-post-container">
+         <div>
+      <h1 class="job-title" >{{i.job_title}}</h1>
+   </div>
+        <div class="job-header">
+       
+            <div class="created-by">Created by: <b> {{i.created_by.first_name}} </b></div>
+        </div>
+        <div class="job-category">Category: {{i.category}}</div>
+        <div class="job-description"><b> Job description:</b>
+            <p>{{i.job_description}}</p>
+        </div>
+        <div class="job-skills">
+            <strong>Skills:</strong>
+            <ul>
+                <li>JavaScript</li>
+                <li>React</li>
+                <li>{{i.skills}}</li>
+            </ul>
+        </div>
+        <div class="job-details">
+            <div class="detail-item">
+                <span class="detail-label">Number of Openings:</span>
+                <span class="detail-value">{{i.number_of_openings}}</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Salary:</span>
+                <span class="detail-value">{{i.salary}}</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Deadline:</span>
+                <span class="detail-value">{{i.deadline}}</span>
+            </div>
+        </div>
+        <div class="job-qualifications">
+            <strong>Qualifications:</strong>
+            <p>{{i.qualifications}}</p>
+        </div>
+     
+    
+    <div class="container">
+      {% if user.user_type == 'admin' and user == i.created_by %}
+      <button class="button"><a href="{% url 'editjob' i.id %}">Edit</a></button>
+      <button class="button button2"><a href="{% url 'deletejob' i.id %}">Delete</a></button>
+      {% elif user.user_type == 'user' and not j %}
+      <button class="button button3"><a href="{% url 'apply' i.id %}">Apply</a></button>
+      {% elif j %}
+        You already applied for this job
+      {% endif %}
+   </div>
+</div>
+    {% endfor %}
+</body>
+</html>
+
+
+{% endblock content %}
